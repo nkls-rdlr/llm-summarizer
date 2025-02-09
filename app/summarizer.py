@@ -85,5 +85,6 @@ def generate_summary(url: str) -> str:
 
 
 if __name__ == "__main__":
-    summary = generate_summary(url="https://www.youtube.com/watch?v=LPZh9BOjkQs")
+    # For testing purposes
+    summary = generate_summary(url="URL")
     print(summary)

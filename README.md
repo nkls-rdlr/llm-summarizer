@@ -28,5 +28,5 @@ A simple Streamlit application for transcribing and summarizing YouTube videos.
 
 ### Quickstart
 - Run "make start" to spin up the containers and access the UI by entering localhost:PORT in your browser.
-- To create the Poetry virtual env in the project folder, run: poetry config virtualenvs.in-project true
+- To create the Poetry virtual env in the project folder, run: poetry config `virtualenvs.in-project true`.
 
