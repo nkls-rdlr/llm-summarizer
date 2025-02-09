@@ -1,0 +1,27 @@
+[project]
+name = "llm-summarizer"
+version = "0.0.1"
+description = "A simple Streamlit application to create written summaries for YouTube videos."
+authors = [
+    {name = "Niklas Rodler", email = "niklas.rodler@gmail.com"}
+]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.12"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ruff = "^0.9.5"
+yt-dlp = "^2025.1.26"
+llvmlite = "0.44.0"
+numba = "^0.61.0"
+openai-whisper = {git = "ssh://git@github.com/openai/whisper.git"}
+langchain-ollama = "^0.2.3"
