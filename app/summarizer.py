@@ -85,6 +85,6 @@ def generate_summary(url: str) -> str:
 
 
 if __name__ == "__main__":
-    # For testing purposes
+    # For testing
     summary = generate_summary(url="URL")
     print(summary)

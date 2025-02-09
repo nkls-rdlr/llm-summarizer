@@ -27,6 +27,6 @@ A simple Streamlit application for transcribing and summarizing YouTube videos.
 - docker-compose
 
 ### Quickstart
-- Run "make start" to spin up the containers and access the UI by entering localhost:PORT in your browser.
+- (Run "make start" to spin up the containers and access the UI by entering localhost:8501 in your browser.)
 - To create the Poetry virtual env in the project folder, run: poetry config `virtualenvs.in-project true`.
-
+- Run streamlit app/client.py from the root directory of the project to start up Streamlit.
