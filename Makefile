@@ -1,4 +1,4 @@
-.PHONY: venv build start
+.PHONY: venv build start streamlit
 
 venv:
 	@. .venv/bin/activate
@@ -9,3 +9,6 @@ build:
 
 start:
 	@docker compose up --build -d
+
+streamlit:
+	@streamlit run app/client.py

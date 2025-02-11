@@ -39,7 +39,7 @@ def _download_audio(url: str) -> str:
         )
 
 
-def _transcribe_audio(file_path: str, model_name: str = "medium") -> str:
+def _transcribe_audio(file_path: str, model_name: str = "small") -> str:
     """
     Transcribes the audio to text using OpenAI Whisper and cleans up the audio 
     file.
@@ -47,7 +47,7 @@ def _transcribe_audio(file_path: str, model_name: str = "medium") -> str:
     if file_path is not None:
         try:
             model = whisper.load_model(model_name)
-            result = model.transcribe(file_path)
+            result = model.transcribe(file_path, fp16=False)
             return result["text"]
         except Exception as e:
             raise RuntimeError(
@@ -82,9 +82,3 @@ def generate_summary(url: str) -> str:
     file_path = _download_audio(url)
     transcript = _transcribe_audio(file_path)
     return _summarize_transcript(transcript)
-
-
-if __name__ == "__main__":
-    # For testing
-    summary = generate_summary(url="URL")
-    print(summary)

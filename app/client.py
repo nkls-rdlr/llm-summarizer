@@ -8,12 +8,14 @@ from xhtml2pdf import pisa
 def _convert_markdown_to_pdf(summary: str) -> None:
     """
     Generates a HTML-formatted PDF file from the Markdown summary, and stores
-    it in temporary cache to serve to the user.
+    it in a temporary cache to make it available for download.
     """
     summary_html = markdown(summary)
     pdf_cache = BytesIO()
+
     pisa.CreatePDF(summary_html, dest=pdf_cache)
     pdf_cache.seek(0)
+
     return pdf_cache
 
 
@@ -34,13 +36,13 @@ st.sidebar.subheader("A simple Streamlit app to transcribe and summarize YouTube
 
 st.sidebar.text("How it works: After you enter the URL of the YouTube video "
                 "you want to summarize, the app downloads its audio, "
-                "transcribes it using OpenAI Whisper and summarizes it using"
+                "transcribes it using OpenAI Whisper and summarizes it using "
                 "Llama 3.1 (8B).")
 
 url = st.sidebar.chat_input("Paste the URL of the YouTube video here")
 
 if url is not None:
-    with st.spinner("Transcribing and summarizing video", show_time=True):
+    with st.spinner("Summarizing...", show_time=True):
         summary = generate_summary(url)
 
     if summary:
