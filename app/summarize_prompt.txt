@@ -1,6 +1,0 @@
-Summarize the following transcript in a structured format using clear topics and bullet points.
-- The summary should be easy to understand, with each topic having a brief heading followed by concise bullet points outlining the key details.
-- While staying concise, make sure to add enough detail so that the content can easily be understood by someone reading it for the first time.
-- Structure the content logically based on its meaning to ensure a coherent and intuitive flow. Do not add extra comments or explanations (e.g. "Here is a summary...:"), just return the summary.
-- Format the summary in Markdown.
-Here is the transcript: 

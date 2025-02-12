@@ -1,5 +1,6 @@
 from langchain_ollama import ChatOllama
 import os
+from prompts import format_prompt, summarize_prompt
 import re
 import shutil
 import tempfile
@@ -109,11 +110,9 @@ def format_transcript(transcript: str) -> str:
     and grouping related sentences into paragraphs. Returns the formatted
     transcript as a Markdown-formatted string.
     """
-    with open("app/format_prompt.txt", "r") as file:
-        format_prompt = file.read()
-
     formatting_prompt = format_prompt + transcript
     response = llm.invoke(formatting_prompt)
+
     return response.content
 
 
@@ -122,11 +121,9 @@ def summarize_transcript(transcript: str) -> str:
     Given a transcript, prompts Llama 3.1 (8B) to create a summary. Returns the
     summary as a Markdown-formatted string.
     """
-    with open("app/summarize_prompt.txt", "r") as file:
-        prompt = file.read()
-
-    summarization_prompt = prompt + transcript
+    summarization_prompt = summarize_prompt + transcript
     response = llm.invoke(summarization_prompt)
+    
     return response.content
 
 
