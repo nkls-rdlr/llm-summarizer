@@ -111,20 +111,15 @@ if url:
             unsafe_allow_html=True,
         )
 
-        if "summary_pdf" not in st.session_state:
-            st.session_state.summary_pdf = convert_markdown_to_pdf(summary)
-
-        if "transcript_pdf" not in st.session_state:
-            st.session_state.transcript_pdf = convert_markdown_to_pdf(
-                formatted_transcript
-            )
+        summary_pdf = convert_markdown_to_pdf(summary)
+        transcript_pdf = convert_markdown_to_pdf(formatted_transcript)
 
         dl_summary, dl_transcript = st.columns(2)
 
         with dl_summary:
             st.download_button(
                 label="Download Summary",
-                data=st.session_state.summary_pdf,
+                data=summary_pdf,
                 file_name="summary.pdf",
                 mime="application/pdf",
             )
@@ -132,7 +127,7 @@ if url:
         with dl_transcript:
             st.download_button(
                 label="Download Transcript",
-                data=st.session_state.transcript_pdf,
+                data=transcript_pdf,
                 file_name="transcript.pdf",
                 mime="application/pdf",
             )
