@@ -72,9 +72,7 @@ url = st.sidebar.chat_input("Paste the URL of the YouTube video here")
 
 transcript_option = st.sidebar.selectbox(
     "Which source should be used for the summary?",
-    (
-        "LLM-generated transcript", "Subtitles"
-    )
+    ("LLM-generated transcript", "Subtitles"),
 )
 
 if url:
@@ -83,6 +81,7 @@ if url:
             try:
                 transcript = download_subtitles(url)
             except Exception as e:
+                st.error(f"Exception: {str(e)}")
                 st.error(
                     "Subtitles could not be downloaded. Downloading "
                     "audio for transcription."
@@ -113,15 +112,20 @@ if url:
             unsafe_allow_html=True,
         )
 
-        summary_pdf = convert_markdown_to_pdf(summary)
-        transcript_pdf = convert_markdown_to_pdf(formatted_transcript)
+        if "summary_pdf" not in st.session_state:
+            st.session_state.summary_pdf = convert_markdown_to_pdf(summary)
+
+        if "transcript_pdf" not in st.session_state:
+            st.session_state.transcript_pdf = convert_markdown_to_pdf(
+                formatted_transcript
+            )
 
         dl_summary, dl_transcript = st.columns(2)
 
         with dl_summary:
             st.download_button(
                 label="Download Summary",
-                data=summary_pdf,
+                data=st.session_state.summary_pdf,
                 file_name="summary.pdf",
                 mime="application/pdf",
             )
@@ -129,7 +133,7 @@ if url:
         with dl_transcript:
             st.download_button(
                 label="Download Transcript",
-                data=transcript_pdf,
+                data=st.session_state.transcript_pdf,
                 file_name="transcript.pdf",
                 mime="application/pdf",
             )

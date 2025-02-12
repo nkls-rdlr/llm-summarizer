@@ -59,7 +59,10 @@ def download_subtitles(url: str) -> str:
         with yt_dlp.YoutubeDL(opts) as extractor:
             extractor.download(url)
 
-        with open(os.path.join(temp_dir, "subs.en-US.vtt"), "r") as file:
+        with open(
+            os.path.join(temp_dir, "".join(map(str, os.listdir(temp_dir)))),
+            "r",
+        ) as file:
             subtitles = file.read()
 
         formatted_subtitles = " ".join(
@@ -123,15 +126,5 @@ def summarize_transcript(transcript: str) -> str:
     """
     summarization_prompt = summarize_prompt + transcript
     response = llm.invoke(summarization_prompt)
-    
+
     return response.content
-
-
-def generate_summary(url: str) -> str:
-    """
-    Handler function that takes a YouTube URL as input, transcribes the audio
-    and returns a summary of the content as a Markdown-formatted string.
-    """
-    file_path = download_audio(url)
-    transcript = transcribe_audio(file_path)
-    return summarize_transcript(transcript)
