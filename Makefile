@@ -1,8 +1,12 @@
-.PHONY: venv build start streamlit
+.PHONY: venv lint build start streamlit
 
-venv:
+env:
 	@. .venv/bin/activate
 	@poetry env list
+
+lint:
+	@ruff check
+	@black --line-length 79 .
 
 build:
 	@docker compose build
@@ -10,5 +14,5 @@ build:
 start:
 	@docker compose up --build -d
 
-streamlit:
+st:
 	@streamlit run app/client.py
