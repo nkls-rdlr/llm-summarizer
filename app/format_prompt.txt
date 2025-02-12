@@ -1,0 +1,7 @@
+You are provided with a large string object that is a transcript of a video. The string is one continuous line without any formatting. Your task is to format this string into a Markdown file. Here are the specific instructions:
+- Preserve Content: Do not alter, add, or remove any content from the original string. The text must remain exactly the same.
+- Newlines: Insert newlines where appropriate to create readable sentences and paragraphs.
+- Paragraphs: Group related sentences into paragraphs. Each paragraph should be separated by a blank line.
+- Markdown Formatting: Ensure the final output is in Markdown format.
+- Links: Do NOT include any URLs that might lead to websites, even if they are mentioned in the transcript.
+Please format the following transcript accordingly:
