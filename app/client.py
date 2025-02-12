@@ -81,7 +81,6 @@ if url:
             try:
                 transcript = download_subtitles(url)
             except Exception as e:
-                st.error(f"Exception: {str(e)}")
                 st.error(
                     "Subtitles could not be downloaded. Downloading "
                     "audio for transcription."
