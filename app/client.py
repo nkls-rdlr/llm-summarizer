@@ -72,9 +72,7 @@ url = st.sidebar.chat_input("Paste the URL of the YouTube video here")
 
 transcript_option = st.sidebar.selectbox(
     "Which source should be used for the summary?",
-    (
-        "LLM-generated transcript", "Subtitles"
-    )
+    ("LLM-generated transcript", "Subtitles"),
 )
 
 if url:
