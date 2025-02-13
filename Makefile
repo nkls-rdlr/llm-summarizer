@@ -1,4 +1,4 @@
-.PHONY: venv lint build start streamlit
+.PHONY: env lint build start streamlit
 
 env:
 	@. .venv/bin/activate
