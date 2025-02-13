@@ -1,5 +1,5 @@
 # llm-summarizer
-A simple LLM application for summarizing the content of YouTube videos that runs entirely locally, powered by Streamlit. Enter a YouTube URL, pick a transcription option, and wait for your LLM-generated summary to be generated.
+A simple LLM application for summarizing the content of YouTube videos that runs locally, powered by Streamlit and Ollama. Enter a YouTube URL, pick a transcription option, and wait for your LLM-generated summary to be generated.
 
 ## Basic functionality
 1. User inputs the URL of a YouTube video in the UI, and selects whether they want to use subtitles or an AI-generated transcript as a basis for the summary.
