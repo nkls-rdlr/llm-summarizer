@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Poetry
-        run: pip install -r poetry
+        run: pip install poetry
 
       - name: Install Dependencies
         run: poetry install

@@ -11,6 +11,9 @@ import yt_dlp
 class YouTubeSummarizer:
 
     def __init__(self):
+        """
+        Initializes the YouTubeSummarizer class with a ChatOllama LLM.
+        """
         self.llm = ChatOllama(
             model="llama3.1:8b", temperature=0.8, num_predict=-1
         )
