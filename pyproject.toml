@@ -1,6 +1,6 @@
 [project]
 name = "llm-summarizer"
-version = "0.0.1"
+version = "0.1.0"
 description = "A simple Streamlit application to create written summaries for YouTube videos."
 authors = [
     {name = "Niklas Rodler", email = "niklas.rodler@gmail.com"}

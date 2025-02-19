@@ -30,6 +30,7 @@ def test_error_if_no_file_in_filepath():
     os.rmdir(empty_file_path)
 
 
+@pytest.mark.skipif(os.getenv("GITHUB_ACTIONS"))
 def test_transcript_not_empty():
     """
     This test asserts that the transcribe_audio() function returns a non-empty
@@ -46,6 +47,7 @@ def test_transcript_not_empty():
     assert isinstance(transcript, str)
 
 
+@pytest.mark.skipif(os.getenv("GITHUB_ACTIONS"))
 def test_error_if_wrong_model_config():
     """
     This test asserts that the transcribe_audio() function throws a
