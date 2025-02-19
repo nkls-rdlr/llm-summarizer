@@ -27,7 +27,7 @@ def test_error_if_transcript_is_empty_summarize():
         summarizer.summarize_transcript(empty_transcript)
 
 
-@pytest.mark.skipif(os.getenv("GITHUB_ACTIONS"))
+@pytest.mark.skipif(bool(os.getenv("GITHUB_ACTIONS")))
 def test_formatted_transcript_is_not_empty():
     """
     This test asserts that the format_transcript() function returns a non-empty
@@ -42,7 +42,7 @@ def test_formatted_transcript_is_not_empty():
     assert isinstance(formatted_transcript, str)
 
 
-@pytest.mark.skipif(os.getenv("GITHUB_ACTIONS"))
+@pytest.mark.skipif(bool(os.getenv("GITHUB_ACTIONS")))
 def test_summary_is_not_empty():
     """
     This test asserts that the summarize_transcript() function returns a
