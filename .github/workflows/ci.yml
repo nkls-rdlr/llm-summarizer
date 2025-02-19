@@ -22,7 +22,7 @@ jobs:
         run: pip install poetry
 
       - name: Install Dependencies
-        run: poetry install
+        run: make install
 
       - name: Lint
         run: make lint

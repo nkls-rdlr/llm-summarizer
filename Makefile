@@ -4,6 +4,9 @@ env:
 	@. .venv/bin/activate
 	@poetry env list
 
+install:
+	@poetry install --without local
+
 lint:
 	@poetry run ruff check
 	@poetry run black --line-length 79 .
