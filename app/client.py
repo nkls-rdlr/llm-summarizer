@@ -6,7 +6,6 @@ from summarizer import YouTubeSummarizer
 from typing import Tuple
 from xhtml2pdf import pisa
 
-
 summarizer = YouTubeSummarizer()
 
 
@@ -76,7 +75,8 @@ if url:
     if transcript_option == "Subtitles":
         with st.spinner("Downloading subtitles", show_time=True):
             try:
-                transcript = summarizer.download_subtitles(url)
+                subtitles = summarizer.download_subtitles(url)
+                transcript = summarizer.format_subtitles(subtitles)
             except Exception:
                 st.error(
                     "Subtitles could not be downloaded. Downloading "
@@ -86,7 +86,13 @@ if url:
                 transcript = summarizer.transcribe_audio(file_path)
     else:
         with st.spinner("Downloading audio", show_time=True):
-            file_path = summarizer.download_audio(url)
+            try:
+                file_path = summarizer.download_audio(url)
+            except Exception as e:
+                st.error(
+                    "Audio could not be downloaded due to the following "
+                    f"exception: {str(e)}"
+                )
         with st.spinner("Transcribing audio", show_time=True):
             transcript = summarizer.transcribe_audio(file_path)
 

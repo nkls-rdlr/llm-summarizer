@@ -1,0 +1,24 @@
+WEBVTT
+Kind: captions
+Language: en-US
+
+00:00:07.500 --> 00:00:09.360
+What does an API gateway do?
+
+00:00:09.360 --> 00:00:10.500
+Why do we need it?
+
+00:00:10.500 --> 00:00:11.580
+Let’s take a look.
+
+00:00:11.580 --> 00:00:16.620
+An API gateway is a single point of&nbsp;
+entry to the clients of an application.
+
+00:00:16.620 --> 00:00:21.780
+It sits between the clients and a collection&nbsp;
+of backend services for the application.
+
+00:00:22.500 --> 00:00:25.860
+An API gateway typically provides&nbsp;
+several important functions.

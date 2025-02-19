@@ -3,7 +3,6 @@ import os
 import pytest
 import tempfile
 
-
 summarizer = YouTubeSummarizer()
 
 

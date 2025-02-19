@@ -178,3 +178,6 @@ cython_debug/
 
 # Local files I don't want to commit
 .local
+
+# Non-text files
+*.wav
