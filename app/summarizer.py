@@ -1,6 +1,6 @@
 from langchain_ollama import ChatOllama
 import os
-from prompts import format_prompt, summarize_prompt
+from app.prompts import format_prompt, summarize_prompt
 import re
 import shutil
 import tempfile
@@ -84,12 +84,14 @@ def download_subtitles(url: str) -> str:
         )
 
 
-def transcribe_audio(file_path: str, model_name: str = "small") -> str:
+def transcribe_audio(
+    file_path: str, remove_tree: bool = True, model_name: str = "small"
+) -> str:
     """
     Transcribes the audio to text using OpenAI Whisper and cleans up the audio
     file.
     """
-    if file_path is not None:
+    if os.path.exists(file_path) and os.path.isfile(file_path):
         try:
             model = whisper.load_model(model_name)
             result = model.transcribe(file_path, fp16=False)
@@ -99,11 +101,11 @@ def transcribe_audio(file_path: str, model_name: str = "small") -> str:
                 f"An unexpected error occurred during transcription: {str(e)}"
             )
         finally:
-            shutil.rmtree(os.path.dirname(file_path))
-
+            if remove_tree:
+                shutil.rmtree(os.path.dirname(file_path))
     else:
-        raise ValueError(
-            "There is no audio file under the specified path to transcribe."
+        raise FileNotFoundError(
+            "There is no audio under the specified path to transcribe."
         )
 
 
@@ -113,10 +115,17 @@ def format_transcript(transcript: str) -> str:
     and grouping related sentences into paragraphs. Returns the formatted
     transcript as a Markdown-formatted string.
     """
-    formatting_prompt = format_prompt + transcript
-    response = llm.invoke(formatting_prompt)
+    if not transcript:
+        raise ValueError("Transcript is empty or does not exist.")
 
-    return response.content
+    try:
+        formatting_prompt = format_prompt + transcript
+        response = llm.invoke(formatting_prompt)
+        return str(response.content)
+    except Exception as e:
+        raise RuntimeError(
+            f"An unexpected error occurred during transcription: {str(e)}"
+        )
 
 
 def summarize_transcript(transcript: str) -> str:
@@ -124,7 +133,14 @@ def summarize_transcript(transcript: str) -> str:
     Given a transcript, prompts Llama 3.1 (8B) to create a summary. Returns the
     summary as a Markdown-formatted string.
     """
-    summarization_prompt = summarize_prompt + transcript
-    response = llm.invoke(summarization_prompt)
+    if not transcript:
+        raise ValueError("Transcript is empty or does not exist.")
 
-    return response.content
+    try:
+        summarization_prompt = summarize_prompt + transcript
+        response = llm.invoke(summarization_prompt)
+        return str(response.content)
+    except Exception as e:
+        raise RuntimeError(
+            f"An unexpected error occurred during transcription: {str(e)}"
+        )

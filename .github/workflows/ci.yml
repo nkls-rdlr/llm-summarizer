@@ -1,0 +1,31 @@
+name: continuousIntegration
+
+on:
+  pull_request:
+    paths:
+      - '**/*.py'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: pip install -r poetry
+
+      - name: Install Dependencies
+        run: poetry install
+
+      - name: Lint
+        run: make lint
+
+      - name: Unit Test
+        run: make test

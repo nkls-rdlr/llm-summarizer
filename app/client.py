@@ -13,7 +13,7 @@ from typing import Tuple
 from xhtml2pdf import pisa
 
 
-def convert_markdown_to_pdf(summary: str) -> None:
+def convert_markdown_to_pdf(summary: str) -> BytesIO:
     """
     Generates a HTML-formatted PDF file from the Markdown summary, and stores
     it in a temporary cache to make it available for download.
@@ -80,7 +80,7 @@ if url:
         with st.spinner("Downloading subtitles", show_time=True):
             try:
                 transcript = download_subtitles(url)
-            except Exception as e:
+            except Exception:
                 st.error(
                     "Subtitles could not be downloaded. Downloading "
                     "audio for transcription."

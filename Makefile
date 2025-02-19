@@ -1,18 +1,16 @@
-.PHONY: env lint build start st
+.PHONY: env lint test app
 
 env:
 	@. .venv/bin/activate
 	@poetry env list
 
 lint:
-	@ruff check
-	@black --line-length 79 .
+	@poetry run ruff check
+	@poetry run black --line-length 79 .
+	@poetry run mypy .
 
-build:
-	@docker compose build
+test:
+	@poetry run pytest .
 
-start:
-	@docker compose up --build -d
-
-st:
-	@streamlit run app/client.py
+app:
+	@poetry run streamlit run app/client.py
