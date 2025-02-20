@@ -2,18 +2,14 @@ import asyncio
 from io import BytesIO
 from markdown import markdown
 import streamlit as st
-from summarizer import (
-    download_audio,
-    download_subtitles,
-    transcribe_audio,
-    format_transcript,
-    summarize_transcript,
-)
+from summarizer import YouTubeSummarizer
 from typing import Tuple
 from xhtml2pdf import pisa
 
+summarizer = YouTubeSummarizer()
 
-def convert_markdown_to_pdf(summary: str) -> None:
+
+def convert_markdown_to_pdf(summary: str) -> BytesIO:
     """
     Generates a HTML-formatted PDF file from the Markdown summary, and stores
     it in a temporary cache to make it available for download.
@@ -34,10 +30,10 @@ async def process_transcript(transcript: str) -> Tuple[str, str]:
     """
     loop = asyncio.get_event_loop()
     summarize_task = loop.run_in_executor(
-        None, summarize_transcript, transcript
+        None, summarizer.summarize_transcript, transcript
     )
     format_transcript_task = loop.run_in_executor(
-        None, format_transcript, transcript
+        None, summarizer.format_transcript, transcript
     )
 
     summary, formatted_transcript = await asyncio.gather(
@@ -79,19 +75,26 @@ if url:
     if transcript_option == "Subtitles":
         with st.spinner("Downloading subtitles", show_time=True):
             try:
-                transcript = download_subtitles(url)
-            except Exception as e:
+                subtitles = summarizer.download_subtitles(url)
+                transcript = summarizer.format_subtitles(subtitles)
+            except Exception:
                 st.error(
                     "Subtitles could not be downloaded. Downloading "
                     "audio for transcription."
                 )
-                file_path = download_audio(url)
-                transcript = transcribe_audio(file_path)
+                file_path = summarizer.download_audio(url)
+                transcript = summarizer.transcribe_audio(file_path)
     else:
         with st.spinner("Downloading audio", show_time=True):
-            file_path = download_audio(url)
+            try:
+                file_path = summarizer.download_audio(url)
+            except Exception as e:
+                st.error(
+                    "Audio could not be downloaded due to the following "
+                    f"exception: {str(e)}"
+                )
         with st.spinner("Transcribing audio", show_time=True):
-            transcript = transcribe_audio(file_path)
+            transcript = summarizer.transcribe_audio(file_path)
 
     if transcript:
         with st.spinner("Summarizing transcript", show_time=True):

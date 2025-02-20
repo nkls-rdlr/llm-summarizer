@@ -170,8 +170,14 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# .DS_Store
+.DS_Store
+
 # Ruff Cache
 .ruff_cache
 
 # Local files I don't want to commit
 .local
+
+# Non-text files
+*.wav

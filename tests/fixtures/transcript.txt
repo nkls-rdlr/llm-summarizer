@@ -1,0 +1,3 @@
+What does an API gateway do? Why do we need it? Let’s take a look. An API 
+gateway is a single point of entry to the clients of an application. It sits 
+between the clients and a collection of backend services for the application. 

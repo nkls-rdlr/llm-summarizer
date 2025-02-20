@@ -1,6 +1,6 @@
 [project]
 name = "llm-summarizer"
-version = "0.0.1"
+version = "0.1.0"
 description = "A simple Streamlit application to create written summaries for YouTube videos."
 authors = [
     {name = "Niklas Rodler", email = "niklas.rodler@gmail.com"}
@@ -21,6 +21,13 @@ package-mode = false
 python = "^3.12"
 ruff = "^0.9.5"
 black = "^25.1.0"
+mypy = "^1.15.0"
+pytest = "^8.3.4"
+
+[tool.poetry.group.local]
+optional = true
+
+[tool.poetry.group.local.dependencies]
 openai-whisper = {git = "ssh://git@github.com/openai/whisper.git"}
 langchain-ollama = "^0.2.3"
 streamlit = "^1.42.0"
@@ -31,3 +38,9 @@ llvmlite = "0.44.0"
 numba = "^0.61.0"
 tensorflow-macos = "^2.16.2"
 tensorflow-metal = "^1.2.0"
+
+[tool.mypy]
+disable_error_code = ["import-untyped", "import-not-found"]
+
+[tool.pytest.ini_options]
+pythonpath = "."

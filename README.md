@@ -38,4 +38,4 @@ To state the obvious, if this was an actual service for end users, it should be 
 - To ensure the Poetry virtual environment is created in the project folder, run: `poetry config virtualenvs.in-project true`.
 - Once initialized, the virtual environment can be activated by running `make env` or `source .venv/bin/activate`.
 - Make sure all dependencies are installed by running `poetry install`.
-- Run `make st` or `streamlit run app/client.py` from the root directory of the project to start up Streamlit. The UI should open automatically on `localhost:8501`.
+- Run `make app` or `streamlit run app/client.py` from the root directory of the project to start up Streamlit. The UI should open automatically on `localhost:8501`.
