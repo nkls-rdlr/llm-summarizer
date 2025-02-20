@@ -27,13 +27,15 @@ def test_error_if_transcript_is_empty_summarize():
         summarizer.summarize_transcript(empty_transcript)
 
 
-@pytest.mark.skipif(bool(os.getenv("GITHUB_ACTIONS")))
+@pytest.mark.skipif(
+    bool(os.getenv("GITHUB_ACTIONS")), reason="Skip during GHA Workflow"
+)
 def test_formatted_transcript_is_not_empty():
     """
     This test asserts that the format_transcript() function returns a non-empty
     string object when passed a valid string object.
     """
-    with open("tests/fixtures/sample_transcript.txt", "r") as file:
+    with open("tests/fixtures/transcript.txt", "r") as file:
         transcript = file.read()
 
     formatted_transcript = summarizer.format_transcript(transcript)
@@ -42,13 +44,15 @@ def test_formatted_transcript_is_not_empty():
     assert isinstance(formatted_transcript, str)
 
 
-@pytest.mark.skipif(bool(os.getenv("GITHUB_ACTIONS")))
+@pytest.mark.skipif(
+    bool(os.getenv("GITHUB_ACTIONS")), reason="Skip during GHA Workflow"
+)
 def test_summary_is_not_empty():
     """
     This test asserts that the summarize_transcript() function returns a
     non-empty string object when passed a valid string object.
     """
-    with open("tests/fixtures/sample_transcript.txt", "r") as file:
+    with open("tests/fixtures/transcript.txt", "r") as file:
         transcript = file.read()
 
     summary = summarizer.summarize_transcript(transcript)

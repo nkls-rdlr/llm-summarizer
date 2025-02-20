@@ -30,7 +30,9 @@ def test_error_if_no_file_in_filepath():
     os.rmdir(empty_file_path)
 
 
-@pytest.mark.skipif(bool(os.getenv("GITHUB_ACTIONS")))
+@pytest.mark.skipif(
+    bool(os.getenv("GITHUB_ACTIONS")), reason="Skip during GHA Workflow"
+)
 def test_transcript_not_empty():
     """
     This test asserts that the transcribe_audio() function returns a non-empty
@@ -38,7 +40,7 @@ def test_transcript_not_empty():
     https://tinyurl.com/kaggleaudio. It has not been pushed to remote as Git
     seems to be having problems with handling large non-text objects.
     """
-    file_path = "tests/fixtures/sample_audio.wav"
+    file_path = "tests/fixtures/audio.wav"
     transcript = summarizer.transcribe_audio(
         file_path=file_path, delete_tempdir=False
     )
@@ -47,13 +49,15 @@ def test_transcript_not_empty():
     assert isinstance(transcript, str)
 
 
-@pytest.mark.skipif(bool(os.getenv("GITHUB_ACTIONS")))
+@pytest.mark.skipif(
+    bool(os.getenv("GITHUB_ACTIONS")), reason="Skip during GHA Workflow"
+)
 def test_error_if_wrong_model_config():
     """
     This test asserts that the transcribe_audio() function throws a
     RuntimeError when passed a correct file_path but false model config.
     """
-    file_path = "tests/fixtures/sample_audio.wav"
+    file_path = "tests/fixtures/audio.wav"
 
     with pytest.raises(RuntimeError):
         summarizer.transcribe_audio(

@@ -4,7 +4,6 @@ import re
 
 summarizer = YouTubeSummarizer()
 
-
 def test_error_if_url_is_invalid_audio():
     """
     This test asserts that the download_audio() function throws a ValueError
@@ -32,7 +31,7 @@ def test_format_subtitles_returns_non_empty_string_object():
     This test asserts that the format_subtitles() function returns a non-empty
     string object when passed a valid string as input.
     """
-    with open("tests/fixtures/sample_subtitles.vtt", "r") as file:
+    with open("tests/fixtures/subtitles.vtt", "r") as file:
         subtitles = file.read()
 
     formatted_subtitles = summarizer.format_subtitles(subtitles)
@@ -46,7 +45,7 @@ def test_format_subtitles_returns_string_with_no_timestamps_or_nbsp():
     This test asserts that the format_subtitles() function returns a string
     object that does not contain timestamps or non-breaking spaces.
     """
-    with open("tests/fixtures/sample_subtitles.vtt", "r") as file:
+    with open("tests/fixtures/subtitles.vtt", "r") as file:
         subtitles = file.read()
 
     formatted_subtitles = summarizer.format_subtitles(subtitles)

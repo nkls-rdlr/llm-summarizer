@@ -5,7 +5,7 @@ import re
 import shutil
 import tempfile
 import whisper
-import yt_dlp
+from yt_dlp import YoutubeDL
 
 
 class YouTubeSummarizer:
@@ -43,7 +43,7 @@ class YouTubeSummarizer:
             raise ValueError("Please enter a YouTube URL with a valid format.")
 
         try:
-            with yt_dlp.YoutubeDL(opts, url) as extractor:
+            with YoutubeDL(opts, url) as extractor:
                 info_dict = extractor.extract_info(url)
 
             return extractor.prepare_filename(info_dict)
@@ -74,7 +74,7 @@ class YouTubeSummarizer:
             raise ValueError("Please enter a YouTube URL with a valid format.")
 
         try:
-            with yt_dlp.YoutubeDL(opts) as extractor:
+            with YoutubeDL(opts) as extractor:
                 extractor.download(url)
 
             with open(
